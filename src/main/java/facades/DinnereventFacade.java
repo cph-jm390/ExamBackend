@@ -33,11 +33,11 @@ public class DinnereventFacade {
         }
     }
 
-    public static Dinnerevent getDinnereventById(Long id) {
+    public static Dinnerevent getDinnereventById(long id) {
         EntityManager em = emf.createEntityManager();
         try {
             Dinnerevent dinnerevent = em.find(Dinnerevent.class, id);
-            //System.out.println("getDinnereventById nåede til return statement med objekt: " + dinnerevent + " med navn: " + dinnerevent.getEventname());
+            System.out.println("getDinnereventById nåede til return statement med objekt: " + dinnerevent + " med navn: " + dinnerevent.getEventname());
             return dinnerevent;
         } finally {
             em.close();

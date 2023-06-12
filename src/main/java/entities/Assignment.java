@@ -22,7 +22,7 @@ public class Assignment {
 
 
     @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "eventname",nullable = false)
+    @JoinColumn(name = "eventname",nullable = true)
     private Dinnerevent dinnerevent;
 
 

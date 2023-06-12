@@ -59,7 +59,7 @@ public class UserFacade {
     }
     public static User getUserByUserEmail(String userEmail) {
         EntityManager em = emf.createEntityManager();
-        System.out.println("user_name kommer herind: " +  userEmail);
+        System.out.println("user_email kommer herind: " +  userEmail);
         try {
             return em.find(User.class, userEmail);
         } finally {
