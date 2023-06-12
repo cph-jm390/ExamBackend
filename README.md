@@ -1,2 +1,2 @@
-This is my example project.
+This is my exam project.
 ```
