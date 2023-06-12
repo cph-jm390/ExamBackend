@@ -50,17 +50,7 @@ public class DinnereventResource {
         List<DinnereventDTO> dinnereventDTOs = DINNEREVENT_FACADE.getAllDinnerevents();
         return Response.ok(dinnereventDTOs).build();
     }
-    /*@GET
-    @Path("alleventnames")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllDinnereventNames() {
-        List<DinnereventDTO> dinnereventDTOs = DINNEREVENT_FACADE.getAllDinnerevents();
-        List<String> eventnames = new ArrayList<>();
-        for (DinnereventDTO dinnereventDTO : dinnereventDTOs) {
-            eventnames.add(dinnereventDTO.getEventname());
-        }
-        return Response.ok(eventnames).build();
-    }*/
+    
     @PUT
     @Path("update")
     @Produces(MediaType.APPLICATION_JSON)
