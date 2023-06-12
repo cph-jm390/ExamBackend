@@ -38,6 +38,17 @@ public class AssignmentResource {
         return "{\"msg\":\"Hello World\"}";
     }
 
+    @GET
+    @Path("all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllAssignments() {
+        List<AssignmentDTO> assignmentDTOs = ASSIGNMENT_FACADE.getAllAssignments();
+        for (AssignmentDTO adto : assignmentDTOs) {
+            System.out.println(adto.getFamilyname());
+        }
+        return Response.ok(assignmentDTOs).build();
+    }
+
    @POST
     @Path("create")
     @Produces(MediaType.APPLICATION_JSON)
@@ -64,7 +75,7 @@ public class AssignmentResource {
         int id= jsonObject.get("tripId").getAsInt();
         User user = UserFacade.getUserByUserEmail(username);
         Assignment assignment = ASSIGNMENT_FACADE.addUserToTrip(id,user);
-        TripDTO tripDTO = new TripDTO(trip.getId(), trip.getTrip_name(), trip.getDate(), trip.getTime(), trip.getLocation(), trip.getDuration(), trip.getPackingList(), trip.getGuide().getGUIDE_NAME());
-        return Response.ok(tripDTO).build();
+        AssignmentDTO assignmentDTO = new AssignmentDTO(assignment.getId(), assignment.getFamilyname(), assignment.getDate(), assignment.getContactInfo(), assignment.getDinnerevent().getEventname());
+        return Response.ok(assignmentDTO).build();
     }
 }

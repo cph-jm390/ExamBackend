@@ -60,7 +60,6 @@ public class  AssignmentFacade {
         try {
             em.getTransaction().begin();
             System.out.println("transaction started");
-            // Associate the users with the trip
             em.merge(user);
             System.out.println("user: " + user + " merged");
             em.merge(assignment);
@@ -73,6 +72,32 @@ public class  AssignmentFacade {
     }
 
     public List<AssignmentDTO> getAllAssignments() {
-       return null;
+        System.out.println("start of getAllAssignments");
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Assignment> query = em.createQuery("SELECT a FROM Assignment a", Assignment.class);
+            List<Assignment> assignments = query.getResultList();
+
+            List<AssignmentDTO> assignmentDTOs = new ArrayList<>();
+            System.out.println("List of assignments gotten: " + assignments.size());
+            for (Assignment a : assignments) {
+                List<UserDTO> userDTOs = new ArrayList<>();
+                AssignmentDTO assignmentDTO = new AssignmentDTO(a.getId(), a.getFamilyname(), a.getDate(), a.getContactInfo(),a.getDinnerevent().getId());
+                if(a.getUsersList() != null) {
+                    for (User user : a.getUsersList()) {
+                        UserDTO userDTO = new UserDTO(user.getUserEmail(), user.getUserPass());
+                        userDTOs.add(userDTO);
+
+                    }
+                }
+                assignmentDTO.setUsersList(userDTOs);
+                assignmentDTOs.add(assignmentDTO);
+
+            }
+            System.out.println("List of assignmentDTOs gotten: " + assignmentDTOs.size());
+            return assignmentDTOs;
+        } finally {
+            em.close();
+        }
     }
 }
