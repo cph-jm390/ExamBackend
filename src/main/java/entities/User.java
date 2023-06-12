@@ -37,8 +37,9 @@ public class User implements Serializable {
 
 
 
+
   @ManyToMany(mappedBy = "usersList", cascade = CascadeType.ALL)
-  private List<Trip> tripList;
+  private List<Assignment> assignmentList;
 
   @JoinTable(name = "user_roles", joinColumns = {
     @JoinColumn(name = "user_email", referencedColumnName = "user_email")}, inverseJoinColumns = {
@@ -46,22 +47,6 @@ public class User implements Serializable {
   @ManyToMany
   private List<Role> roleList = new ArrayList<>();
 
-
-  public Integer getBirthyear() {
-    return birthyear;
-  }
-
-  public void setBirthyear(Integer birthyear) {
-    this.birthyear = birthyear;
-  }
-
-  public Integer getAccount() {
-    return account;
-  }
-
-  public void setAccount(Integer account) {
-    this.account = account;
-  }
 
   @JoinTable
   public List<String> getRolesAsStrings() {
@@ -74,7 +59,8 @@ public class User implements Serializable {
       });
     return rolesAsStrings;
   }
-
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  private List<Transaction> transactionsList;
   public User() {}
 
   //TODO Change when password is hashed
@@ -90,12 +76,20 @@ public class User implements Serializable {
     this.account = account;
   }
 
+  public User(String userEmail, String userPass, String address, Integer birthyear, Integer account, List<Transaction> transactionsList) {
+    this.userEmail = userEmail;
+    this.userPass = userPass;
+    this.address = address;
+    this.birthyear = birthyear;
+    this.account = account;
+    this.transactionsList = transactionsList;
+  }
 
   public String getUserEmail() {
     return userEmail;
   }
 
-  public void setUserName(String userEmail) {
+  public void setUserEmail(String userEmail) {
     this.userEmail = userEmail;
   }
 
@@ -106,7 +100,21 @@ public class User implements Serializable {
   public void setUserPass(String userPass) {
     this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());;
   }
+  public Integer getBirthyear() {
+    return birthyear;
+  }
 
+  public void setBirthyear(Integer birthyear) {
+    this.birthyear = birthyear;
+  }
+
+  public Integer getAccount() {
+    return account;
+  }
+
+  public void setAccount(Integer account) {
+    this.account = account;
+  }
   public List<Role> getRoleList() {
     return roleList;
   }
@@ -119,12 +127,22 @@ public class User implements Serializable {
     roleList.add(userRole);
   }
 
-  public List<Trip> getTripList() {
-    return tripList;
+  public List<Assignment> getAssignmentList() {
+    return assignmentList;
   }
 
-  public void setTripList(List<Trip> tripList) {
-    this.tripList = tripList;
+  public void setAssignmentList(List<Assignment> assignmentList) {
+    this.assignmentList = assignmentList;
   }
 
+  public List<Transaction> getTransactionsList() {
+    return transactionsList;
+  }
+
+  public void setTransactionsList(List<Transaction> transactionsList) {
+    this.transactionsList = transactionsList;
+  }
+  public void addTransaction(Transaction userTransaction) {
+    transactionsList.add(userTransaction);
+  }
 }

@@ -36,20 +36,20 @@ public class Dinnerevent {
 
     //ret til assigment
     @OneToMany(mappedBy = "dinnerevent" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Trip> trips;
+    private List<Assignment> assignments;
 
 
 
     public Dinnerevent() {
     }
 
-    public Dinnerevent(Long id, String eventname, String location, String dish, Integer price ,List<Trip> trips) {
+    public Dinnerevent(Long id, String eventname, String location, String dish, Integer price ,List<Assignment> assignments) {
         this.id = id;
         this.location = location;
         this.eventname = eventname;
         this.dish = dish;
         this.price = price;
-        this.trips = trips;
+        this.assignments = assignments;
     }
 
     public Dinnerevent(Long id, String eventname, String location, String dish, Integer price) {
@@ -100,12 +100,12 @@ public class Dinnerevent {
         this.price = price;
     }
 
-    public List<Trip> getTrips() {
-        return trips;
+    public List<Assignment> getAssignments() {
+        return assignments;
     }
 
-    public void setTrips(List<Trip> trips) {
-        this.trips = trips;
+    public void setAssignments(List<Assignment> assignments) {
+        this.assignments = assignments;
     }
 
 

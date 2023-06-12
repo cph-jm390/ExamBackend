@@ -5,14 +5,14 @@ import java.util.List;
 public class UserDTO {
     private String userName;
     private String userPass;
-    private List<TripDTO> trips;
+    private List<AssignmentDTO> assignments;
 
     public UserDTO() {
     }
 
-    public UserDTO(String userName, List<TripDTO> trips) {
+    public UserDTO(String userName, List<AssignmentDTO> assignments) {
         this.userName = userName;
-        this.trips = trips;
+        this.assignments = assignments;
     }
 
     public UserDTO(String userName, String userPass) {
@@ -28,11 +28,11 @@ public class UserDTO {
         this.userName = userName;
     }
 
-    public List<TripDTO> getTrips() {
-        return trips;
+    public List<AssignmentDTO> getAssignments() {
+        return assignments;
     }
 
-    public void setTrips(List<TripDTO> trips) {
-        this.trips = trips;
+    public void setAssignments(List<AssignmentDTO> assignments) {
+        this.assignments = assignments;
     }
 }

@@ -9,18 +9,18 @@ public class DinnereventDTO {
     private String dish;
     private Integer price;
 
-    private List<TripDTO> trips;
+    private List<AssignmentDTO> assignments;
 
     public DinnereventDTO() {
     }
 
-    public DinnereventDTO(Long id, String eventname, String location, String dish, Integer price, List<TripDTO> trips) {
+    public DinnereventDTO(Long id, String eventname, String location, String dish, Integer price, List<AssignmentDTO> assignments) {
         this.id = id;
         this.eventname= eventname;
         this.location = location;
         this.dish=dish;
         this.price=price;
-        this.trips = trips;
+        this.assignments = assignments;
     }
 
     public Long getId() {
@@ -63,11 +63,11 @@ public class DinnereventDTO {
         this.price = price;
     }
 
-    public List<TripDTO> getTrips() {
-        return trips;
+    public List<AssignmentDTO> getAssignments() {
+        return assignments;
     }
 
-    public void setTrips(List<TripDTO> trips) {
-        this.trips = trips;
+    public void setAssignments(List<AssignmentDTO> assignments) {
+        this.assignments = assignments;
     }
 }
