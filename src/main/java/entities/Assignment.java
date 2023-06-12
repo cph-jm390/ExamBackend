@@ -21,10 +21,9 @@ public class Assignment {
     private String contactInfo;
 
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "eventname",nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "eventname", nullable = true)
     private Dinnerevent dinnerevent;
-
 
 
     @JoinTable(name = "family_users", joinColumns = {
@@ -92,6 +91,7 @@ public class Assignment {
     public void setDinnerevent(Dinnerevent dinnerevent) {
         this.dinnerevent = dinnerevent;
     }
+
     public List<User> getUsersList() {
         return usersList;
     }

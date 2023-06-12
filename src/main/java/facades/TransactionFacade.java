@@ -20,7 +20,8 @@ public class TransactionFacade {
         }
         return instance;
     }
+
     public List<Transaction> getAllTransactions() {
-       return null;
+        return null;
     }
 }

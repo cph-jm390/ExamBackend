@@ -16,10 +16,10 @@ public class DinnereventDTO {
 
     public DinnereventDTO(Long id, String eventname, String location, String dish, Integer price, List<AssignmentDTO> assignments) {
         this.id = id;
-        this.eventname= eventname;
+        this.eventname = eventname;
         this.location = location;
-        this.dish=dish;
-        this.price=price;
+        this.dish = dish;
+        this.price = price;
         this.assignments = assignments;
     }
 

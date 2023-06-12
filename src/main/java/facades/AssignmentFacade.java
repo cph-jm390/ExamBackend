@@ -13,7 +13,7 @@ import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class  AssignmentFacade {
+public class AssignmentFacade {
     static EntityManagerFactory emf;
     private static AssignmentFacade instance;
 
@@ -24,11 +24,12 @@ public class  AssignmentFacade {
         }
         return instance;
     }
+
     public static Assignment getAssignmentById(Long id) {
         System.out.println("getAssignmentById startet");
         EntityManager em = emf.createEntityManager();
         try {
-            Assignment assignment=em.find(Assignment.class, id);
+            Assignment assignment = em.find(Assignment.class, id);
             return em.find(Assignment.class, id);
         } finally {
             em.close();
@@ -48,6 +49,7 @@ public class  AssignmentFacade {
             em.close();
         }
     }
+
     public static Assignment addUserToAssignment(long id, User user) {
         System.out.println("start of addUserToAssignment");
         EntityManager em = emf.createEntityManager();
@@ -84,7 +86,7 @@ public class  AssignmentFacade {
             List<AssignmentDTO> assignmentDTOs = new ArrayList<>();
             for (Assignment a : assignments) {
                 List<UserDTO> userDTOs = new ArrayList<>();
-                AssignmentDTO assignmentDTO = new AssignmentDTO(a.getId(), a.getFamilyname(), a.getDate(), a.getContactInfo(),a.getDinnerevent().getEventname());
+                AssignmentDTO assignmentDTO = new AssignmentDTO(a.getId(), a.getFamilyname(), a.getDate(), a.getContactInfo(), a.getDinnerevent().getEventname());
                 /*System.out.println("List of assignments gotten: " + assignments.size());
                 System.out.println("box in data from assignmentDTO");
                 System.out.println("Familyname "+ assignmentDTO.getFamilyname());
@@ -105,7 +107,7 @@ public class  AssignmentFacade {
                 assignmentDTOs.add(assignmentDTO);
 
             }
-            System.out.println("List of assignments gotten with size: " + assignments.size() +". Returning");
+            System.out.println("List of assignments gotten with size: " + assignments.size() + ". Returning");
             return assignmentDTOs;
         } finally {
             em.close();

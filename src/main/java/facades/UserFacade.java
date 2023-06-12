@@ -57,16 +57,16 @@ public class UserFacade {
             em.close();
         }
     }
+
     public static User getUserByUserEmail(String user_email) {
         EntityManager em = emf.createEntityManager();
-        System.out.println("user_name kommer herind: " +  user_email);
         try {
             return em.find(User.class, user_email);
         } finally {
             em.close();
         }
     }
-    }
+}
 
 
 

@@ -19,6 +19,7 @@ import javax.ws.rs.Path;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 @Path("dinnerevents")
 public class DinnereventResource {
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
@@ -50,7 +51,7 @@ public class DinnereventResource {
         List<DinnereventDTO> dinnereventDTOs = DINNEREVENT_FACADE.getAllDinnerevents();
         return Response.ok(dinnereventDTOs).build();
     }
-    
+
     @PUT
     @Path("update")
     @Produces(MediaType.APPLICATION_JSON)
@@ -60,6 +61,7 @@ public class DinnereventResource {
         DinnereventDTO dinnereventDTO = DINNEREVENT_FACADE.updateDinnerevent(dinnerevent);
         return Response.ok(dinnereventDTO).build();
     }
+
     @DELETE
     @Path("delete")
     @Produces(MediaType.APPLICATION_JSON)

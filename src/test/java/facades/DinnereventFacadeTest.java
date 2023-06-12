@@ -1,7 +1,6 @@
 package facades;
 
 
-
 import dtos.DinnereventDTO;
 import entities.Dinnerevent;
 import entities.Assignment;
@@ -24,6 +23,7 @@ public class DinnereventFacadeTest {
 
 
     private static List<Assignment> assignments = new ArrayList<>();
+
     @BeforeAll
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactoryForTest();
@@ -31,7 +31,7 @@ public class DinnereventFacadeTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(new User("test", "test","test", 1990, 1000));
+            em.persist(new User("test", "test", "test", 1990, 1000));
             em.getTransaction().commit();
         } catch (RollbackException e) {
             System.out.println("User already exists");
@@ -54,6 +54,7 @@ public class DinnereventFacadeTest {
             em.close();
         }
     }
+
     @Test
     void createDinnerevent() {
 
@@ -78,35 +79,37 @@ public class DinnereventFacadeTest {
         assertEquals("testNavn1", dinnereventFound.getEventname());
     }
 
-@Test
-    void getAll(){
-    //Virker kun alene i testen
-    System.out.println("getAll\n");
-    EntityManager em = emf.createEntityManager();
-    Dinnerevent dinnerevent1 = facade.createDinnerevent(new Dinnerevent(2L, "testNavn2", "testLocation2", "lasagne", 15));
-    assertNotNull(dinnerevent1);
-    System.out.println("dinnerevent1 created successfully");
-    Dinnerevent dinnerevent2 = facade.createDinnerevent(new Dinnerevent(3L, "testNavn3", "testLocation3", "lasagne", 15));
-    assertNotNull(dinnerevent2);
-    Dinnerevent dinnerevent3=facade.getDinnereventById(2L);
-    System.out.println("dinnerevent2 created successfully");
-    List<DinnereventDTO> dinnereventList = facade.getAllDinnerevents();
-    for (DinnereventDTO dinnereventDTO : dinnereventList) {
-        System.out.println(dinnereventDTO.getEventname());
-    }
-    assertEquals(3, dinnereventList.size());
-}
-@Test
-    void updateDinnerevent(){
-    System.out.println("updateDinnerevent\n");
-    EntityManager em = emf.createEntityManager();
-    Dinnerevent dinnerevent1 = facade.createDinnerevent(new Dinnerevent(null, "testNavn2", "testLocation2", "lasagne", 15));
-    dinnerevent1.setDish("pizza");
-    DinnereventDTO dinnerevent2 = facade.updateDinnerevent(dinnerevent1);
-    assertEquals("pizza", dinnerevent2.getDish());
-    }
     @Test
-    void deleteDinnerevent(){
+    void getAll() {
+        //Virker kun alene i testen
+        System.out.println("getAll\n");
+        EntityManager em = emf.createEntityManager();
+        Dinnerevent dinnerevent1 = facade.createDinnerevent(new Dinnerevent(2L, "testNavn2", "testLocation2", "lasagne", 15));
+        assertNotNull(dinnerevent1);
+        System.out.println("dinnerevent1 created successfully");
+        Dinnerevent dinnerevent2 = facade.createDinnerevent(new Dinnerevent(3L, "testNavn3", "testLocation3", "lasagne", 15));
+        assertNotNull(dinnerevent2);
+        Dinnerevent dinnerevent3 = facade.getDinnereventById(2L);
+        System.out.println("dinnerevent2 created successfully");
+        List<DinnereventDTO> dinnereventList = facade.getAllDinnerevents();
+        for (DinnereventDTO dinnereventDTO : dinnereventList) {
+            System.out.println(dinnereventDTO.getEventname());
+        }
+        assertEquals(3, dinnereventList.size());
+    }
+
+    @Test
+    void updateDinnerevent() {
+        System.out.println("updateDinnerevent\n");
+        EntityManager em = emf.createEntityManager();
+        Dinnerevent dinnerevent1 = facade.createDinnerevent(new Dinnerevent(null, "testNavn2", "testLocation2", "lasagne", 15));
+        dinnerevent1.setDish("pizza");
+        DinnereventDTO dinnerevent2 = facade.updateDinnerevent(dinnerevent1);
+        assertEquals("pizza", dinnerevent2.getDish());
+    }
+
+    @Test
+    void deleteDinnerevent() {
         System.out.println("deleteDinnerevent\n");
         EntityManager em = emf.createEntityManager();
         Dinnerevent dinnerevent1 = facade.createDinnerevent(new Dinnerevent(null, "testNavn2", "testLocation2", "lasagne", 15));

@@ -13,17 +13,17 @@ public class Dinnerevent {
 
     @Basic(optional = false)
     @Size(min = 1, max = 255)
-    @Column (name = "eventname", nullable = false, length = 255)
+    @Column(name = "eventname", nullable = false, length = 255)
     private String eventname;
 
     @Basic(optional = false)
     @Size(min = 1, max = 255)
-    @Column (name = "location", nullable = false, length = 255)
+    @Column(name = "location", nullable = false, length = 255)
     private String location;
 
     @Basic(optional = false)
     @Size(min = 1, max = 255)
-    @Column (name = "dish")
+    @Column(name = "dish")
     private String dish;
 
 
@@ -32,18 +32,14 @@ public class Dinnerevent {
     private Integer price;
 
 
-
-
-
-    @OneToMany(mappedBy = "dinnerevent" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "dinnerevent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Assignment> assignments;
-
 
 
     public Dinnerevent() {
     }
 
-    public Dinnerevent(Long id, String eventname, String location, String dish, Integer price ,List<Assignment> assignments) {
+    public Dinnerevent(Long id, String eventname, String location, String dish, Integer price, List<Assignment> assignments) {
         this.id = id;
         this.location = location;
         this.eventname = eventname;

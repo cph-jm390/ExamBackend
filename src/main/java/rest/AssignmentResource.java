@@ -24,6 +24,7 @@ import javax.ws.rs.Path;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 @Path("assignments")
 public class AssignmentResource {
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
@@ -32,6 +33,7 @@ public class AssignmentResource {
     private static final AssignmentFacade ASSIGNMENT_FACADE = AssignmentFacade.getFacade(EMF);
     private static final DinnereventFacade DINNEREVENT_FACADE = DinnereventFacade.getFacade(EMF);
     private static final UserFacade USER_FACADE = UserFacade.getFacade(EMF);
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
@@ -49,7 +51,7 @@ public class AssignmentResource {
         return Response.ok(assignmentDTOs).build();
     }
 
-   @POST
+    @POST
     @Path("create")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -58,7 +60,7 @@ public class AssignmentResource {
         JsonObject jsonObject = parser.parse(json).getAsJsonObject();
         //tager eventid fra json og laver det om til long
         long eventid = jsonObject.get("eventid").getAsLong();
-        Dinnerevent dinnerevent =  DINNEREVENT_FACADE.getDinnereventById(eventid);
+        Dinnerevent dinnerevent = DINNEREVENT_FACADE.getDinnereventById(eventid);
         //tager assignment fra jsonobject og laver det om til en assignment
         Assignment assignment = GSON.fromJson(json, Assignment.class);
         assignment.setDinnerevent(dinnerevent);
@@ -66,6 +68,7 @@ public class AssignmentResource {
 
         return Response.ok(assignmentDTO).build();
     }
+
     @POST
     @Path("adduser")
     @Produces(MediaType.APPLICATION_JSON)
@@ -77,9 +80,9 @@ public class AssignmentResource {
         String userInput = jsonObject.get("userInput").getAsString();
         //tager id fra json og laver det om til long
 
-        long id= jsonObject.get("id").getAsLong();
+        long id = jsonObject.get("id").getAsLong();
         User user = USER_FACADE.getUserByUserEmail(userInput);
-        Assignment assignment = ASSIGNMENT_FACADE.addUserToAssignment(id,user);
+        Assignment assignment = ASSIGNMENT_FACADE.addUserToAssignment(id, user);
         AssignmentDTO assignmentDTO = new AssignmentDTO(assignment.getId(), assignment.getFamilyname(), assignment.getDate(), assignment.getContactInfo(), assignment.getDinnerevent().getEventname());
         return Response.ok(assignmentDTO).build();
     }

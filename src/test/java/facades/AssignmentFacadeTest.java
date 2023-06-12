@@ -89,7 +89,7 @@ class AssignmentFacadeTest {
     }
 
     @Test
-    void getAll(){
+    void getAll() {
 
 
         System.out.println("getAllAssignments\n");
@@ -104,8 +104,9 @@ class AssignmentFacadeTest {
         System.out.println("Assignment 2 was created: " + adto2);
         assertEquals(2, facade.getAllAssignments().size());
     }
+
     @Test
-    void addUserToAssignment(){
+    void addUserToAssignment() {
         System.out.println("addUserToAssignment\n");
         EntityManager em = emf.createEntityManager();
         Dinnerevent dinnerevent = dinnereventFacade.createDinnerevent(new Dinnerevent(null, "beskrivelse", "billede", "tester", 15, assignments));
