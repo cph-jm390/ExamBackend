@@ -41,21 +41,28 @@ public class DinnereventResource {
         DINNEREVENT_FACADE.createDinnerevent(dinnerevent);
         return Response.ok(dinnerevent).build();
     }
-        /*
+
 
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllGuides() {
-        List<GuideDTO> guideDTOs = GUIDE_FACADE.getAllGuides();
-
-        List<String> guideNames = new ArrayList<>();
-        for (GuideDTO guideDTO : guideDTOs) {
-            guideNames.add(guideDTO.getGUIDE_NAME());
+        List<DinnereventDTO> dinnereventDTOs = DINNEREVENT_FACADE.getAllDinnerevents();
+        for (DinnereventDTO dinnereventDTO : dinnereventDTOs) {
+            System.out.println(dinnereventDTO.getEventname());
         }
-        return Response.ok(guideNames).build();
+        return Response.ok(dinnereventDTOs).build();
     }
-    @GET
+    @PUT
+    @Path("update")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateDinnerevent(String json) throws IOException {
+        Dinnerevent dinnerevent = GSON.fromJson(json, Dinnerevent.class);
+        DinnereventDTO dinnereventDTO = DINNEREVENT_FACADE.updateDinnerevent(dinnerevent);
+        return Response.ok(dinnereventDTO).build();
+    }
+    /*@GET
     @Path("specific")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSpecificGuide(String json){

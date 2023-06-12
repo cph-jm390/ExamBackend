@@ -104,7 +104,7 @@ public class DinnereventResourceTest {
 
     @Test
     public void testCreateGuide() {
-        Dinnerevent dinnerevent = new Dinnerevent(3L, "Some eventname", "Some location", "Some dish", 100);
+        Dinnerevent dinnerevent = new Dinnerevent(null, "Some eventname", "Some location", "Some dish", 100);
 
         given()
                 .contentType(ContentType.JSON)
@@ -112,13 +112,13 @@ public class DinnereventResourceTest {
                 .post("/dinnerevents/create/")
                 .then()
                 .statusCode(200)
-                .body("id", equalTo(3))
+                .log().body()
                 .body("eventname", equalTo("Some eventname"))
                 .body("location", equalTo("Some location"))
                 .body("dish", equalTo("Some dish"))
                 .body("price", equalTo(100));
     }
-/*
+
     @Test
     public void testGetAllGuides() {
         given()
@@ -129,12 +129,12 @@ public class DinnereventResourceTest {
                 .statusCode(HttpStatus.OK_200.getStatusCode())
                 .body("$", hasSize(2))
                 .log().body()
-                .body("[0]", equalTo("aaa"))
-                .body("[1]", equalTo("Some txt"));
+                .body("[0].eventname", equalTo("bbb"))
+                .body("[1].eventname", equalTo("aaa"));
 
     }
 
-
+/*
     public void testGetSpecificGuides() {
         given()
                 .contentType(ContentType.JSON)
@@ -153,6 +153,6 @@ public class DinnereventResourceTest {
 
 */
 
-    //This test assumes the database contains two rows
+
 
 }
