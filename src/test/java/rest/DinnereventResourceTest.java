@@ -134,24 +134,6 @@ public class DinnereventResourceTest {
 
     }
 
-/*
-    public void testGetSpecificGuides() {
-        given()
-                .contentType(ContentType.JSON)
-                .when()
-                .get("/guides/specific")
-                .then()
-                .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("$", hasSize(2))
-                .log().body()
-                .body("[0]", equalTo("aaa"))
-                .body("[1]", equalTo("Some txt"));
-
-    }
-
-
-
-*/
 
 
 

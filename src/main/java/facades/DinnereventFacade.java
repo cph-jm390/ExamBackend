@@ -76,4 +76,16 @@ public class DinnereventFacade {
 
 
     }
+    public static DinnereventDTO deleteDinnerevent(long id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Dinnerevent dinnerevent = em.find(Dinnerevent.class, id);
+            em.getTransaction().begin();
+            em.remove(dinnerevent);
+            em.getTransaction().commit();
+            return new DinnereventDTO(dinnerevent.getId(), dinnerevent.getEventname(), dinnerevent.getLocation(), dinnerevent.getDish(), dinnerevent.getPrice(), null);
+        } finally {
+            em.close();
+        }
+    }
 }

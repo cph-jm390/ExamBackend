@@ -73,15 +73,15 @@ public class DinnereventResource {
         DinnereventDTO dinnereventDTO = DINNEREVENT_FACADE.updateDinnerevent(dinnerevent);
         return Response.ok(dinnereventDTO).build();
     }
-    /*@GET
-    @Path("specific")
+    @DELETE
+    @Path("delete")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSpecificGuide(String json){
-        GuideDTO guideDTO = GUIDE_FACADE.getGuideDTOByName(json);
-        System.out.println(guideDTO.getGUIDE_NAME());
-        System.out.println(guideDTO.getGender());
-        return Response.ok(guideDTO).build();
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteDinnerevent(String json) throws IOException {
+        Dinnerevent dinnerevent = GSON.fromJson(json, Dinnerevent.class);
+        DinnereventDTO dinnereventDTO = DINNEREVENT_FACADE.deleteDinnerevent(dinnerevent.getId());
+        return Response.ok(dinnereventDTO).build();
     }
-*/
+
 
 }
