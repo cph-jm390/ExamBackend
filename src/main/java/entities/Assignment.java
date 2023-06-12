@@ -28,7 +28,7 @@ public class Assignment {
 
 
     @JoinTable(name = "family_users", joinColumns = {
-            @JoinColumn(name = "familyname", referencedColumnName = "family")}, inverseJoinColumns = {
+            @JoinColumn(name = "familyname", referencedColumnName = "familyname")}, inverseJoinColumns = {
             @JoinColumn(name = "user_email", referencedColumnName = "user_email")})
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<User> usersList = new ArrayList<>();

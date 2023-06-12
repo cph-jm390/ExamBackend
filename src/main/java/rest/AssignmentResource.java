@@ -31,7 +31,7 @@ public class AssignmentResource {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final AssignmentFacade ASSIGNMENT_FACADE = AssignmentFacade.getFacade(EMF);
     private static final DinnereventFacade DINNEREVENT_FACADE = DinnereventFacade.getFacade(EMF);
-
+    private static final UserFacade USER_FACADE = UserFacade.getFacade(EMF);
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
@@ -71,10 +71,11 @@ public class AssignmentResource {
     public Response addUserToAssignment(String json) throws IOException {
         JsonParser parser = new JsonParser();
         JsonObject jsonObject = parser.parse(json).getAsJsonObject();
-        String username = jsonObject.get("username").getAsString();
-        int id= jsonObject.get("tripId").getAsInt();
-        User user = UserFacade.getUserByUserEmail(username);
-        Assignment assignment = ASSIGNMENT_FACADE.addUserToTrip(id,user);
+        String userInput = jsonObject.get("userInput").getAsString();
+        long id= jsonObject.get("id").getAsLong();
+        User user = USER_FACADE.getUserByUserEmail(userInput);
+        System.out.println(user.getUserEmail() +" " + user.getBirthyear());
+        Assignment assignment = ASSIGNMENT_FACADE.addUserToAssignment(id,user);
         AssignmentDTO assignmentDTO = new AssignmentDTO(assignment.getId(), assignment.getFamilyname(), assignment.getDate(), assignment.getContactInfo(), assignment.getDinnerevent().getEventname());
         return Response.ok(assignmentDTO).build();
     }

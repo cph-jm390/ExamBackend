@@ -1,5 +1,7 @@
 package dtos;
 
+import entities.Dinnerevent;
+
 import java.util.List;
 
 public class AssignmentDTO {
@@ -9,6 +11,7 @@ public class AssignmentDTO {
     private String date;
     private String contactinfo;
     private String eventname;
+    private Dinnerevent dinnerevent;
     private List<UserDTO> usersList;
 
     public AssignmentDTO() {
@@ -29,6 +32,14 @@ public class AssignmentDTO {
         this.date = date;
         this.contactinfo = contactinfo;
         this.eventname = eventname;
+    }
+
+    public AssignmentDTO(Long id, String familyname, String date, String contactinfo, Dinnerevent dinnerevent) {
+        this.id = id;
+        this.familyname = familyname;
+        this.date = date;
+        this.contactinfo = contactinfo;
+        this.dinnerevent = dinnerevent;
     }
 
     public Long getId() {
@@ -70,6 +81,14 @@ public class AssignmentDTO {
 
     public void setEventname(String eventname) {
         this.eventname = eventname;
+    }
+
+    public Dinnerevent getDinnerevent() {
+        return dinnerevent;
+    }
+
+    public void setDinnerevent(Dinnerevent dinnerevent) {
+        this.dinnerevent = dinnerevent;
     }
 
     public List<UserDTO> getUsersList() {
