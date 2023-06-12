@@ -21,6 +21,8 @@ public class SetupTestUsers {
     // Whatever you do DO NOT COMMIT and PUSH with the real passwords
 
     User user = new User("user@user.dk", "test123", "testvej 1", 1990, 1000);
+    User user2 = new User("user2@user.dk", "test123", "testvej 1", 1998, 1000);
+    User user3 = new User("user3@user.dk", "test123", "testvej 1", 1995, 1000);
     User admin = new User("admin@admin.dk", "test123", "testvej 2", 1980, 2000);
     User both = new User("user_admin@alt.dk", "test123", "testvej 3", 1970, 3000);
 
@@ -31,9 +33,13 @@ public class SetupTestUsers {
     Role userRole = new Role("user");
     Role adminRole = new Role("admin");
     user.addRole(userRole);
+    user2.addRole(userRole);
+    user3.addRole(userRole);
     admin.addRole(adminRole);
     both.addRole(userRole);
     both.addRole(adminRole);
+    em.persist(user2);
+    em.persist(user3);
     em.persist(userRole);
     em.persist(adminRole);
     em.persist(user);

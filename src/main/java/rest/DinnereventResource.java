@@ -53,7 +53,7 @@ public class DinnereventResource {
         }
         return Response.ok(dinnereventDTOs).build();
     }
-    @GET
+    /*@GET
     @Path("alleventnames")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllDinnereventNames() {
@@ -63,7 +63,7 @@ public class DinnereventResource {
             eventnames.add(dinnereventDTO.getEventname());
         }
         return Response.ok(eventnames).build();
-    }
+    }*/
     @PUT
     @Path("update")
     @Produces(MediaType.APPLICATION_JSON)

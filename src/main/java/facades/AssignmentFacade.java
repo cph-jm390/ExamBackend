@@ -34,9 +34,7 @@ public class  AssignmentFacade {
             em.close();
         }
     }
-    public AssignmentDTO getAssignmentById(int id) {
-        return null;
-    }
+
 
     public AssignmentDTO createAssignment(Assignment assignment) {
         EntityManager em = emf.createEntityManager();

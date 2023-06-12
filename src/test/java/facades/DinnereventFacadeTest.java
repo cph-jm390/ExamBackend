@@ -80,6 +80,7 @@ public class DinnereventFacadeTest {
 
 @Test
     void getAll(){
+    //Virker kun alene i testen
     System.out.println("getAll\n");
     EntityManager em = emf.createEntityManager();
     Dinnerevent dinnerevent1 = facade.createDinnerevent(new Dinnerevent(2L, "testNavn2", "testLocation2", "lasagne", 15));
@@ -95,4 +96,22 @@ public class DinnereventFacadeTest {
     }
     assertEquals(3, dinnereventList.size());
 }
+@Test
+    void updateDinnerevent(){
+    System.out.println("updateDinnerevent\n");
+    EntityManager em = emf.createEntityManager();
+    Dinnerevent dinnerevent1 = facade.createDinnerevent(new Dinnerevent(null, "testNavn2", "testLocation2", "lasagne", 15));
+    dinnerevent1.setDish("pizza");
+    DinnereventDTO dinnerevent2 = facade.updateDinnerevent(dinnerevent1);
+    assertEquals("pizza", dinnerevent2.getDish());
+    }
+    @Test
+    void deleteDinnerevent(){
+        System.out.println("deleteDinnerevent\n");
+        EntityManager em = emf.createEntityManager();
+        Dinnerevent dinnerevent1 = facade.createDinnerevent(new Dinnerevent(null, "testNavn2", "testLocation2", "lasagne", 15));
+        facade.deleteDinnerevent(dinnerevent1.getId());
+        List<DinnereventDTO> dinnereventList = facade.getAllDinnerevents();
+        assertEquals(1, dinnereventList.size());
+    }
 }
