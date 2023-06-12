@@ -34,10 +34,10 @@ public class DinnereventFacade {
     }
 
     public static Dinnerevent getDinnereventById(long id) {
+        System.out.println("getDinnereventById startet");
         EntityManager em = emf.createEntityManager();
         try {
             Dinnerevent dinnerevent = em.find(Dinnerevent.class, id);
-            System.out.println("getDinnereventById nåede til return statement med objekt: " + dinnerevent + " med navn: " + dinnerevent.getEventname());
             return dinnerevent;
         } finally {
             em.close();
@@ -45,6 +45,7 @@ public class DinnereventFacade {
     }
 
     public List<DinnereventDTO> getAllDinnerevents() {
+        System.out.println("getAllDinnerevents startet");
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Dinnerevent> query = em.createQuery("SELECT d FROM Dinnerevent d", Dinnerevent.class);
@@ -56,7 +57,6 @@ public class DinnereventFacade {
                 DinnereventDTO dinnereventDTO = new DinnereventDTO(dinnerevent.getId(), dinnerevent.getEventname(), dinnerevent.getLocation(), dinnerevent.getDish(), dinnerevent.getPrice(), null);
                 dinnereventDTOs.add(dinnereventDTO);
             }
-            System.out.println("getAllDinnerevents nåede til return statement");
             return dinnereventDTOs;
         } finally {
             em.close();
@@ -64,6 +64,7 @@ public class DinnereventFacade {
     }
 
     public static DinnereventDTO updateDinnerevent(Dinnerevent dinnerevent) {
+        System.out.println("updateDinnerevent startet");
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -77,6 +78,7 @@ public class DinnereventFacade {
 
     }
     public static DinnereventDTO deleteDinnerevent(long id) {
+        System.out.println("deleteDinnerevent startet");
         EntityManager em = emf.createEntityManager();
         try {
             Dinnerevent dinnerevent = em.find(Dinnerevent.class, id);

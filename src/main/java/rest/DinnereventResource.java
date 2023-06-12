@@ -48,9 +48,6 @@ public class DinnereventResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllDinnerevents() {
         List<DinnereventDTO> dinnereventDTOs = DINNEREVENT_FACADE.getAllDinnerevents();
-        for (DinnereventDTO dinnereventDTO : dinnereventDTOs) {
-            System.out.println(dinnereventDTO.getEventname());
-        }
         return Response.ok(dinnereventDTOs).build();
     }
     /*@GET

@@ -34,7 +34,7 @@ public class Dinnerevent {
 
 
 
-    //ret til assigment
+
     @OneToMany(mappedBy = "dinnerevent" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Assignment> assignments;
 

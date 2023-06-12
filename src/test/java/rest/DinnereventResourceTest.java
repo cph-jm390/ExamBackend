@@ -86,6 +86,7 @@ public class DinnereventResourceTest {
             em.close();
         }
     }
+
     @Test
     public void testServerIsUp() {
         System.out.println("Getting so far");
@@ -103,7 +104,7 @@ public class DinnereventResourceTest {
     }
 
     @Test
-    public void testCreateGuide() {
+    public void testCreateDinnerevent() {
         Dinnerevent dinnerevent = new Dinnerevent(null, "Some eventname", "Some location", "Some dish", 100);
 
         given()
@@ -120,7 +121,7 @@ public class DinnereventResourceTest {
     }
 
     @Test
-    public void testGetAllGuides() {
+    public void testGetAllDinnerevents() {
         given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -134,7 +135,47 @@ public class DinnereventResourceTest {
 
     }
 
+    @Test
+    public void testUpdateDinnerevent() {
+        // Create a Dinnerevent object with updated values
+        Dinnerevent updatedDinnerevent = new Dinnerevent(d1.getId(), "Updated eventname", "Updated location", "Updated dish", 200);
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(updatedDinnerevent)
+                .put("/dinnerevents/update")
+                .then()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .log().body()
+                .body("eventname", equalTo("Updated eventname"))
+                .body("location", equalTo("Updated location"))
+                .body("dish", equalTo("Updated dish"))
+                .body("price", equalTo(200));
+    }
 
 
+
+    @Test
+    //virker ikke, statuscode 400?
+    public void testDeleteDinnerevent() {
+        Dinnerevent deletedDinnerevent = new Dinnerevent(1L, "aaa", "location a", "dish a ", 1000000);
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(deletedDinnerevent)
+                .log().body()
+                .delete("/dinnerevents/delete")
+                .then()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .log().body()
+                .body("id", equalTo(d1.getId().intValue()))
+                .body("eventname", equalTo(d1.getEventname()))
+                .body("location", equalTo(d1.getLocation()))
+                .body("dish", equalTo(d1.getDish()))
+                .body("price", equalTo(d1.getPrice()));
+    }
 
 }
+
+
+

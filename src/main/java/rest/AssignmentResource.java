@@ -56,8 +56,10 @@ public class AssignmentResource {
     public Response createDinnerevent(String json) throws IOException {
         JsonParser parser = new JsonParser();
         JsonObject jsonObject = parser.parse(json).getAsJsonObject();
+        //tager eventid fra json og laver det om til long
         long eventid = jsonObject.get("eventid").getAsLong();
-       Dinnerevent dinnerevent =  DINNEREVENT_FACADE.getDinnereventById(eventid);
+        Dinnerevent dinnerevent =  DINNEREVENT_FACADE.getDinnereventById(eventid);
+        //tager assignment fra jsonobject og laver det om til en assignment
         Assignment assignment = GSON.fromJson(json, Assignment.class);
         assignment.setDinnerevent(dinnerevent);
         AssignmentDTO assignmentDTO = ASSIGNMENT_FACADE.createAssignment(assignment);
@@ -71,10 +73,12 @@ public class AssignmentResource {
     public Response addUserToAssignment(String json) throws IOException {
         JsonParser parser = new JsonParser();
         JsonObject jsonObject = parser.parse(json).getAsJsonObject();
+        //tager userInput fra json og laver det om til en string
         String userInput = jsonObject.get("userInput").getAsString();
+        //tager id fra json og laver det om til long
+
         long id= jsonObject.get("id").getAsLong();
         User user = USER_FACADE.getUserByUserEmail(userInput);
-        System.out.println(user.getUserEmail() +" " + user.getBirthyear());
         Assignment assignment = ASSIGNMENT_FACADE.addUserToAssignment(id,user);
         AssignmentDTO assignmentDTO = new AssignmentDTO(assignment.getId(), assignment.getFamilyname(), assignment.getDate(), assignment.getContactInfo(), assignment.getDinnerevent().getEventname());
         return Response.ok(assignmentDTO).build();

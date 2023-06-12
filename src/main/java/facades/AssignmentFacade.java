@@ -25,10 +25,10 @@ public class  AssignmentFacade {
         return instance;
     }
     public static Assignment getAssignmentById(Long id) {
+        System.out.println("getAssignmentById startet");
         EntityManager em = emf.createEntityManager();
         try {
             Assignment assignment=em.find(Assignment.class, id);
-            System.out.println("getAssignmentById nåede til return statement med objekt: " + assignment + " med navn: " + assignment.getFamilyname());
             return em.find(Assignment.class, id);
         } finally {
             em.close();
@@ -49,24 +49,18 @@ public class  AssignmentFacade {
         }
     }
     public static Assignment addUserToAssignment(long id, User user) {
+        System.out.println("start of addUserToAssignment");
         EntityManager em = emf.createEntityManager();
         Assignment assignment = getAssignmentById(id);
-        System.out.println("addUserToAssignment fik assignment her: " + assignment.getFamilyname());
         List<User> users = new ArrayList<>();
         assignment.setUsersList(users);
-        System.out.println("assignment fik tilføjet arraylist");
+        System.out.println("Assignment successfully added list of users");
         assignment.addUser(user);
         System.out.println(user + " added to " + assignment);
-
-
-
         try {
             em.getTransaction().begin();
-            System.out.println("transaction started");
             em.merge(user);
-            System.out.println("user: " + user + " merged");
             em.merge(assignment);
-            System.out.println("assignment: " + assignment + " merged");
             em.getTransaction().commit();
             return assignment;
         } finally {
@@ -88,7 +82,6 @@ public class  AssignmentFacade {
             System.out.println("Dinnerevent "+ assignments.get(0).getDinnerevent().getEventname());
             System.out.println("box in data from assignments");*/
             List<AssignmentDTO> assignmentDTOs = new ArrayList<>();
-            System.out.println("List of assignments gotten: " + assignments.size());
             for (Assignment a : assignments) {
                 List<UserDTO> userDTOs = new ArrayList<>();
                 AssignmentDTO assignmentDTO = new AssignmentDTO(a.getId(), a.getFamilyname(), a.getDate(), a.getContactInfo(),a.getDinnerevent().getEventname());
@@ -99,7 +92,9 @@ public class  AssignmentFacade {
                 System.out.println("Contactinfo "+ assignmentDTO.getContactinfo());
                 System.out.println("Dinnerevent "+ assignmentDTO.getEventname());
                 System.out.println("box in data from assignmentDTO");*/
-                /*if(a.getUsersList() != null) {
+                //nedenstående udkommentering virker ikke for some reason.
+                /*
+                if(a.getUsersList() != null) {
                     for (User user : a.getUsersList()) {
                         UserDTO userDTO = new UserDTO(user.getUserEmail(), user.getUserPass());
                         userDTOs.add(userDTO);
@@ -110,14 +105,11 @@ public class  AssignmentFacade {
                 assignmentDTOs.add(assignmentDTO);
 
             }
-            System.out.println("List of assignmentDTOs gotten: " + assignmentDTOs.size());
-            System.out.println("box in");
-            System.out.println("should be getting eventname"+ assignmentDTOs.get(0).getEventname());
-            System.out.println("box in");
+            System.out.println("List of assignments gotten with size: " + assignments.size() +". Returning");
             return assignmentDTOs;
         } finally {
             em.close();
-            System.out.println("closing");
+
         }
     }
 }
