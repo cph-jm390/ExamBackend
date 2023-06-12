@@ -1,6 +1,6 @@
 package facades;
 
-import entities.Guide;
+import entities.Dinnerevent;
 import entities.User;
 
 import javax.persistence.EntityManager;
@@ -32,11 +32,11 @@ public class UserFacade {
         return instance;
     }
 
-    public User getVerifiedUser(String username, String password) throws AuthenticationException {
+    public User getVerifiedUser(String useremail, String password) throws AuthenticationException {
         EntityManager em = emf.createEntityManager();
         User user;
         try {
-            user = em.find(User.class, username);
+            user = em.find(User.class, useremail);
             if (user == null || !user.verifyPassword(password)) {
                 throw new AuthenticationException("Invalid user name or password");
             }
@@ -57,11 +57,11 @@ public class UserFacade {
             em.close();
         }
     }
-    public static User getUserByUsername(String user_name) {
+    public static User getUserByUserEmail(String userEmail) {
         EntityManager em = emf.createEntityManager();
-        System.out.println("user_name kommer herind: " +  user_name);
+        System.out.println("user_name kommer herind: " +  userEmail);
         try {
-            return em.find(User.class, user_name);
+            return em.find(User.class, userEmail);
         } finally {
             em.close();
         }

@@ -1,6 +1,6 @@
 package dtos;
 
-import dtos.GuideDTO;
+import dtos.DinnereventDTO;
 import dtos.UserDTO;
 
 import java.util.List;
@@ -14,13 +14,13 @@ public class TripDTO {
     private String location;
     private String duration;
     private String packingList;
-    private String guide_name;
+    private String eventname;
     private List<UserDTO> usersList;
 
     public TripDTO() {
     }
 
-    public TripDTO(Long id, String trip_name, String date, String time, String location, String duration, String packingList, String guide_name, List<UserDTO> usersList) {
+    public TripDTO(Long id, String trip_name, String date, String time, String location, String duration, String packingList, String eventname, List<UserDTO> usersList) {
         this.id = id;
         this.trip_name = trip_name;
         this.date = date;
@@ -28,11 +28,11 @@ public class TripDTO {
         this.location = location;
         this.duration = duration;
         this.packingList = packingList;
-        this.guide_name = guide_name;
+        this.eventname = eventname;
         this.usersList = usersList;
     }
 
-    public TripDTO(Long id, String trip_name, String date, String time, String location, String duration, String packingList, String guide_name) {
+    public TripDTO(Long id, String trip_name, String date, String time, String location, String duration, String packingList, String eventname) {
         this.id = id;
         this.trip_name = trip_name;
         this.date = date;
@@ -40,7 +40,7 @@ public class TripDTO {
         this.location = location;
         this.duration = duration;
         this.packingList = packingList;
-        this.guide_name = guide_name;
+        this.eventname = eventname;
     }
 
     public Long getId() {
@@ -99,12 +99,12 @@ public class TripDTO {
         this.packingList = packingList;
     }
 
-    public String getGuide_name() {
-        return guide_name;
+    public String getEventname() {
+        return eventname;
     }
 
-    public void setGuide_name(String guide_name) {
-        this.guide_name = guide_name;
+    public void setEventname(String eventname) {
+        this.eventname = eventname;
     }
 
     public List<UserDTO> getUsersList() {

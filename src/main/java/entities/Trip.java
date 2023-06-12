@@ -30,14 +30,14 @@ public class Trip {
     private String packingList;
 
     @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "guide_name",nullable = false)
-    private Guide guide;
+    @JoinColumn(name = "eventname",nullable = false)
+    private Dinnerevent dinnerevent;
 
 
 
     @JoinTable(name = "trip_users", joinColumns = {
             @JoinColumn(name = "trip_name", referencedColumnName = "trip_name")}, inverseJoinColumns = {
-            @JoinColumn(name = "user_name", referencedColumnName = "user_name")})
+            @JoinColumn(name = "user_email", referencedColumnName = "user_email")})
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<User> usersList = new ArrayList<>();
     //kig på dette
@@ -46,7 +46,7 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(Long id, String trip_name, String date, String time, String location, String duration, String packingList, Guide guide) {
+    public Trip(Long id, String trip_name, String date, String time, String location, String duration, String packingList, Dinnerevent dinnerevent) {
         this.id = id;
         this.trip_name = trip_name;
         this.date = date;
@@ -54,7 +54,7 @@ public class Trip {
         this.location = location;
         this.duration = duration;
         this.packingList = packingList;
-        this.guide = guide;
+        this.dinnerevent = dinnerevent;
     }
 
     public Trip(Long id, String trip_name, String date, String time, String location, String duration, String packingList) {
@@ -124,12 +124,12 @@ public class Trip {
         this.trip_name = trip_name;
     }
 
-    public Guide getGuide() {
-        return guide;
+    public Dinnerevent getDinnerevent() {
+        return dinnerevent;
     }
 
-    public void setGuide(Guide guide) {
-        this.guide = guide;
+    public void setDinnerevent(Dinnerevent dinnerevent) {
+        this.dinnerevent = dinnerevent;
     }
     public List<User> getUsersList() {
         return usersList;

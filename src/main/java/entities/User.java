@@ -14,13 +14,26 @@ public class User implements Serializable {
   private static final long serialVersionUID = 1L;
   @Id
   @Basic(optional = false)
-  @Column(name = "user_name", length = 40, nullable = false)
-  private String userName;
+  @Column(name = "user_email", length = 40, nullable = false)
+  private String userEmail;
 
   @Basic(optional = false)
   @Size(min = 1, max = 255)
   @Column(name = "user_password", nullable = false)
   private String userPass;
+
+  @Basic(optional = false)
+  @Size(min = 1, max = 255)
+  @Column(name = "address", nullable = false)
+  private String address;
+
+    @Basic(optional = false)
+  @Column(name = "birthyear", nullable = false)
+  private Integer birthyear;
+
+    @Basic(optional = false)
+  @Column(name = "account", nullable = false)
+  private Integer account;
 
 
 
@@ -28,10 +41,27 @@ public class User implements Serializable {
   private List<Trip> tripList;
 
   @JoinTable(name = "user_roles", joinColumns = {
-    @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
+    @JoinColumn(name = "user_email", referencedColumnName = "user_email")}, inverseJoinColumns = {
     @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
   @ManyToMany
   private List<Role> roleList = new ArrayList<>();
+
+
+  public Integer getBirthyear() {
+    return birthyear;
+  }
+
+  public void setBirthyear(Integer birthyear) {
+    this.birthyear = birthyear;
+  }
+
+  public Integer getAccount() {
+    return account;
+  }
+
+  public void setAccount(Integer account) {
+    this.account = account;
+  }
 
   @JoinTable
   public List<String> getRolesAsStrings() {
@@ -52,18 +82,21 @@ public class User implements Serializable {
     return BCrypt.checkpw(pw, userPass);
     }
 
-  public User(String userName, String userPass) {
-    this.userName = userName;
+  public User(String userEmail, String userPass, String address, Integer birthyear, Integer account) {
+    this.userEmail = userEmail;
     this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+    this.address = address;
+    this.birthyear = birthyear;
+    this.account = account;
   }
 
 
-  public String getUserName() {
-    return userName;
+  public String getUserEmail() {
+    return userEmail;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setUserName(String userEmail) {
+    this.userEmail = userEmail;
   }
 
   public String getUserPass() {

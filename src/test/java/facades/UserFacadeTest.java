@@ -44,8 +44,8 @@ class UserFacadeTest {
     @Test
     void createUser() {
         EntityManager em = emf.createEntityManager();
-        User user = facade.createUser(new User("test", "test"));
-        assertEquals("test", user.getUserName());
+        User user = facade.createUser(new User("test", "test", "test", 1000,  1000));
+        assertEquals("test", user.getUserEmail());
     }
 
 //    @Test

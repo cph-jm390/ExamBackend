@@ -13,7 +13,7 @@ public class UserPrincipal implements Principal {
 
   /* Create a UserPrincipal, given the Entity class User*/
   public UserPrincipal(User user) {
-    this.username = user.getUserName();
+    this.username = user.getUserEmail();
     this.roles = user.getRolesAsStrings();
   }
 
