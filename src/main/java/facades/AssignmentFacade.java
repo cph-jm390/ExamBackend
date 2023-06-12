@@ -59,10 +59,7 @@ public class  AssignmentFacade {
         System.out.println("assignment fik tilføjet arraylist");
         assignment.addUser(user);
         System.out.println(user + " added to " + assignment);
-        List<Assignment> assignments= new ArrayList<>();
-        assignments.add(assignment);
-        user.setAssignmentList(assignments);
-        System.out.println("user fik tilføjet arraylist");
+
 
 
         try {
